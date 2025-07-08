@@ -1,31 +1,25 @@
-/* import type { NextApiRequest, NextApiResponse } from "next";
-import jwt from "jsonwebtoken";
-
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
-) {
-	const authHeader = req.headers.authorization;
-	if (!authHeader || !authHeader.startsWith("Bearer ")) {
-		return res
-			.status(401)
-			.json({ error: "Missing or invalid authorization header" });
-	}
-
-	const token = authHeader.split(" ")[1];
-
-	try {
-		const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
-			userId: string;
-			email: string;
-		};
-		res.status(200).json({ message: "Access granted", user: decoded });
-	} catch (err) {
-		res.status(401).json({ error: "Invalid or expired token" });
-	}
-}
+/**
+ * @swagger
+ * /api/profile:
+ *   get:
+ *     summary: Obtiene el perfil del usuario autenticado
+ *     tags: [Perfiles]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Perfil del usuario obtenido exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserProfileResponse'
+ *       401:
+ *         description: No autorizado (token inválido o no proporcionado)
+ *       404:
+ *         description: Usuario no encontrado
+ *       405:
+ *         description: Método no permitido
  */
-
 // pages/api/profile.ts
 import type { NextApiResponse } from "next";
 import { authenticate, AuthenticatedRequest } from "@/middleware/auth";
@@ -36,6 +30,10 @@ export default async function handler(
 	req: AuthenticatedRequest,
 	res: NextApiResponse
 ) {
+	if (req.method !== 'GET') {
+        return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
 	await dbConnect();
 	let authorized = false;
 

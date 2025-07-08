@@ -1,3 +1,29 @@
+/**
+ * @swagger
+ * /api/auth/register:
+ *   post:
+ *     summary: Registra un nuevo usuario
+ *     tags: [Autenticación]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserRegister'
+ *     responses:
+ *       201:
+ *         description: Usuario creado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserResponse'
+ *       400:
+ *         description: Error de validación
+ *       409:
+ *         description: El correo ya está en uso
+ *       405:
+ *         description: Método no permitido
+ */
 // pages/api/auth/register.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect  from "@/src/lib/mongodb";
@@ -27,3 +53,4 @@ export default async function handler(
 		user: { name: user.name, email: user.email },
 	});
 }
+
