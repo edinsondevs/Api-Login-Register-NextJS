@@ -1,3 +1,33 @@
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Inicia sesión de un usuario
+ *     tags: [Autenticación]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserLogin'
+ *     responses:
+ *       200:
+ *         description: Inicio de sesión exitoso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: JWT para la sesión del usuario
+ *       400:
+ *         description: Error de validación
+ *       401:
+ *         description: Credenciales inválidas
+ *       405:
+ *         description: Método no permitido
+ */
 // pages/api/auth/login.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "@/src/lib/mongodb";
