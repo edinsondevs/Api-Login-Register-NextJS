@@ -6,7 +6,7 @@ const spec = createSwaggerSpec({
     openapi: '3.0.0',
     info: {
       title: 'API de Autenticación con Next.js',
-      version: '1.2.1',
+      version: '2.0.1',
       description:
         'Una API simple para la autenticación de usuarios construida con Next.js, MongoDB y TypeScript.',
     },
