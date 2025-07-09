@@ -6,7 +6,7 @@ const options: swaggerJsdoc.Options = {
 		openapi: "3.0.0",
 		info: {
 			title: "API de Autenticación con Next.js",
-			version: "1.0.0",
+			version: "2.0.0",
 			description:
 				"Una API simple para la autenticación de usuarios construida con Next.js, MongoDB y TypeScript.",
 		},
