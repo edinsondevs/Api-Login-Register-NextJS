@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev ",
     "build": "next build",
+    "postbuild": "node generate-swagger.mjs",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,11 +13,11 @@
     "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.2",
-    "next": "15.3.5",
+    "next": "14.2.5",
     "next-swagger-doc": "^0.4.1",
     "swagger-ui-react": "^5.25.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "zod": "^3.25.75"
   },
   "devDependencies": {
@@ -24,8 +25,8 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/mongoose": "^5.11.96",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "tailwindcss": "^4",
     "typescript": "^5",
         "@types/swagger-ui-react": "^5.18.0"
