@@ -8,7 +8,7 @@ const SwaggerUI = dynamic(() => import('swagger-ui-react'), { ssr: false });
 function ApiDocPage() {
   return (
 		<SwaggerUI
-			url='/api/doc'
+			url='/openapi.json'
 			docExpansion='list'
 			defaultModelsExpandDepth={-1}
 		/>

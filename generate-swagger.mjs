@@ -1,12 +1,12 @@
-import swaggerJsdoc from 'swagger-jsdoc';
-import path from 'path';
+import { createSwaggerSpec } from 'next-swagger-doc';
+import fs from 'fs';
 
-const options: swaggerJsdoc.Options = {
+const spec = createSwaggerSpec({
   definition: {
     openapi: '3.0.0',
     info: {
       title: 'API de Autenticación con Next.js',
-      version: '1.0.0',
+      version: '1.2.1',
       description:
         'Una API simple para la autenticación de usuarios construida con Next.js, MongoDB y TypeScript.',
     },
@@ -25,10 +25,7 @@ const options: swaggerJsdoc.Options = {
       },
     ],
   },
-  apis: [
-    path.join(process.cwd(), 'src', 'pages', 'api', '**', '*.ts'),
-    path.join(process.cwd(), 'src', 'schemas', '*.ts'),
-  ],
-};
+  apiFolder: 'src/pages/api',
+});
 
-export const swaggerSpec = swaggerJsdoc(options);
+fs.writeFileSync('public/openapi.json', JSON.stringify(spec, null, 2));
