@@ -12,7 +12,7 @@ export function authenticate(
 	next: () => void
 ) {
 	const authHeader = req.headers.authorization;
-	if (!authHeader || !authHeader.startsWith("Bearer ")) {
+	if (!authHeader?.startsWith("Bearer ")) {
 		return res
 			.status(401)
 			.json({ error: "Missing or invalid authorization header" });
@@ -20,8 +20,16 @@ export function authenticate(
 
 	const token = authHeader.split(" ")[1];
 
+	const secret = process.env.JWT_SECRET;
+
+	if (!secret) {
+		console.error("JWT Secret is not defined in environment variables.");
+		// Esto es un error de configuración del servidor, por lo que devolvemos un 500.
+		return res.status(500).json({ error: "Internal Server Error" });
+	}
+
 	try {
-		const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
+		const decoded = jwt.verify(token, secret) as {
 			userId: string;
 			email: string;
 		};

@@ -44,7 +44,11 @@ export default async function handler(
 	await dbConnect();
 
 	const result = loginSchema.safeParse(req.body);
-	if (!result.success) return res.status(400).json(result.error);
+	if (!result.success) {
+		return res.status(400).json({
+			errors: result.error.flatten().fieldErrors,
+		});
+	}
 
 	const { email, password } = result.data;
 	const user = await User.findOne({ email });
