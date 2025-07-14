@@ -39,7 +39,11 @@ export default async function handler(
 	await dbConnect();
 
 	const result = registerSchema.safeParse(req.body);
-	if (!result.success) return res.status(400).json(result.error);
+	if (!result.success) {
+		return res.status(400).json({
+			errors: result.error.flatten().fieldErrors,
+		});
+	}
 
 	const { name, email, password } = result.data;
 	const userExists = await User.findOne({ email });
@@ -53,4 +57,3 @@ export default async function handler(
 		user: { name: user.name, email: user.email },
 	});
 }
-
