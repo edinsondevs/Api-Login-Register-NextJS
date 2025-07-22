@@ -12,7 +12,11 @@ export const metadata: Metadata = {
   keywords: 'API, Next.js, Login, Logout, Authentication',
   authors: {
     name: 'Edinson Madrid'
+  },
+  icons:{
+    icon: '/favicon.ico',
   }
+  
 };
 
 export default function RootLayout({
@@ -21,13 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        </head>
-        <body className={inter.className}>
-        {children}
-      </body>
-    </html>
+		<html lang='en'>
+			<body className={inter.className}>{children}</body>
+		</html>
   );
 }
